@@ -21,3 +21,33 @@ This project required extracting unstructured text via API and applying statisti
 The engine processed a 97-article sample:
 * **Macro Sentiment:** The algorithm accurately captured the overwhelming market anxiety, with **Negative sentiment (55%)** dominating the coverage.
 * **Model Nuance & Edge Cases:** The project highlighted a critical limitation of lexicon-based NLP models. Headlines containing terms like "Surge" (typically a positive financial indicator) alongside geopolitical conflict were occasionally misclassified as "Positive." This demonstrates the necessity of context-aware models (like LLMs) over purely mathematical text scorers for complex geopolitical events.
+
+### 🧠 Code Glimpse: The Sentiment Engine
+Here is the core function used in this project to translate raw text into actionable business categories:
+
+```python
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import pandas as pd
+
+# Initialize the NLP reader
+sia = SentimentIntensityAnalyzer()
+
+def analyze_sentiment(text):
+    # handle missing descriptions
+    if pd.isna(text):
+        return 'Neutral'
+    
+    # Calculate mathematical polarity score (-1.0 to 1.0)
+    score = sia.polarity_scores(text)['compound']
+    
+    # Translate math into business logic
+    if score > 0.05:
+        return 'Positive'
+    elif score < -0.05:
+        return 'Negative'
+    else:
+        return 'Neutral'
+
+# Apply engine to unstructured text column
+df_news['Sentiment'] = df_news['Description'].apply(analyze_sentiment)
+```
