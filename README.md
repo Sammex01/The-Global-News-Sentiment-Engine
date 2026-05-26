@@ -12,7 +12,7 @@ This project required extracting unstructured text via API and applying statisti
 * **Categorical Aggregation & Visualization:** Translated continuous mathematical sentiment scores into discrete business categories and visualized the market polarity using `Seaborn` and `Matplotlib`.
 
 ### 📊 Visualization: 30-Day Market Sentiment
-*(The breakdown of new sentiment surrounding the recent oil price spike)*
+*(The breakdown of news sentiment surrounding the recent oil price spike)*
 
 ![Sentiment Analysis Bar Chart](sentiment_chart.png) 
 
